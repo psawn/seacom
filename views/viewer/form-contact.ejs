@@ -1,0 +1,74 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 center-text fs-28px" style="margin-top:70px;margin-bottom:30px">THÔNG TIN LIÊN HỆ</div>
+        <div class="col-md-12 text-center" style="font-size: 23px;font-weight:bold;margin-bottom: 12px;">CÔNG TY CỔ PHẦN ĐẦU TƯ VÀ CÔNG NGHỆ OSB (OSB JSC)</div>
+        <div class="col-md-12 text-center" style="font-size:14px;margin-bottom: 18px;">Phòng 305, Tòa nhà Detect - Số 8 Tôn Thất Thuyết, Mỹ Đình, Hà Nội, Việt Nam</div>
+        <div class="inside-container">
+            <div class="row font-weight-bold">
+                <div style="margin-right: 30px;"><img src="imgs/phone-icon.png">84-24-36404069; 0678901111</div>
+                <div><img src="imgs/global-icon.png">www.osbholding.com</div>
+                <div style="margin-left: 30px;"><img src="imgs/message-icon.png">contact@osbholding.com</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container contact-info mt-1">
+    <div class="row">
+        <div class="col-sm">
+            <div style="width:260px;margin-left: 100px;">
+                <div class="row mb-2 font-weight-bold">Chi nhánh thành phố Hồ Chí Minh</div>
+                <div class="row">Phòng 1001, Lầu 10, tòa nhà Vina Giầy, 180-182 Lý Chính Thắng, P.9, Q.3, TP.HCM</div>
+                <div class="row">84-28-35261237, 0678902222</div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div style="width:300px;margin-left: 80px;">
+                <div class="row mb-2 font-weight-bold">Chi nhánh thành phố Vũng Tàu</div>
+                <div class="row">152 Phan Chu Trinh, P.2, TP. Vũng Tàu</div>
+                <div class="row">0254-3577332, 0678906666</div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div style="width:260px;">
+                <div class="row mb-2 font-weight-bold">Chi nhánh thành phố Đà Nẵng</div>
+                <div class="row">Phòng 812, Lầu 8, KS. One Opera, 115 Nguyễn Văn Linh, Nam Dương, Q. Hải Châu, TP Đà Nẵng</div>
+                <div class="row">0254-3577332, 0678903333</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="contact-form mt-2 mb-5">
+<div class="container">
+    <% if (message=='success') { %>
+        <script>
+            alert_success();
+        </script>
+    <% } %>
+        
+    <div class="row">
+        <div class="text-color-blue font-weight-bold" style="margin-left: 100px;">
+            HOẶC CHO PHÉP CHÚNG TÔI TÌM HIỂU THÊM MỘT CHÚT THÔNG TIN VỀ BẠN
+        </div>
+    </div>
+    <div class="row relative">
+        <form autocomplete="off" action="/luu-thong-tin" method="post" style="margin-left: 220px;">
+            <div class="font-weight-bold fs-20px mt-2 mb-2">Tên công ty *</div>
+            <input type="text" id="organizationname" name="organizationname" required class="input border-black">
+            <div class="font-weight-bold fs-20px mt-2 mb-2">Tên người liên hệ *</div>
+            <input type="text" id="tennguoi" name="tennguoi" required class="input border-black">
+            <div class="font-weight-bold fs-20px mt-2 mb-2">Địa chỉ email *</div>
+            <input type="email" id="email" name="email" required class="input border-black">
+            <div class="font-weight-bold fs-20px mt-2 mb-2">Số điện thoại *</div>
+            <input type="text" id="phonenumber" name="phonenumber" required class="input border-black" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <div class="font-weight-bold fs-20px mt-2 mb-2">Tin nhắn </div>
+            <textarea style="resize: none" class="input border-black" rows="4" name="tinnhan"></textarea>
+            <div>
+                <button class="absolute btn btn-send " type="submit">
+                    <div class="fs-20px">Gửi đi</div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

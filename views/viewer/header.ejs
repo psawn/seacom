@@ -1,0 +1,54 @@
+<header>
+    <div class="container">
+        <div class="menu">
+            <div class="logo">
+                <a href="/"><img src="imgs/logoseacom.png"></a>
+            </div>
+            <div class="nav">
+                <nav class="navbar py-0  navbar-expand-lg mr-0 navbar-ligh">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Giới thiệu <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sản phẩm
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <% dssanpham.map(function(e){ %>
+                                        <a class="dropdown-item " href="/sanpham/<%- e.idsanpham%>"><%- e.masanpham%></a>
+                                    <% })%>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dichvu">Dịch vụ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/tintuc">Tin tức</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/lienhe">Liên hệ</a>
+                            </li>
+                            <li onclick="showSearchForm()" class="nav-item">
+                                <img src="imgs/search.png">
+                            </li>
+                            <li id="language-list" class="nav-item">
+                                <img class="language language_active" src="imgs/vietnam.png">
+                                <img class="language" src="imgs/uk.png">
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <form id="search-form" action="/tim-kiem" method="get" class="form-inline absolute t100-r5p" style="opacity:0;transition: 0;">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"  placeholder="Search">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</header>   

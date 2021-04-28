@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <%- include('headlink')%>
+</head>
+<body>
+<%- include('header')%>    
+<section>
+    <%- include('slideshow')%>
+    <div class="mt-5 mb-5 full-container">
+        <div class="mb-5 mt-5 center-text fs-28px">DỊCH VỤ CỦA SEACOM</div>
+        <div class="service-list">
+            <div class="service-list">
+                <div class="item service1">
+                    <a href="#" class="nounderline">
+                        <div class="icon"><img src="imgs/icon-service1.png"></div>
+                        <div class="detail-service">
+                            <div>ĐIỆN THOẠI &ensp; &ensp; VÀ TIN NHẮN</div>
+                            <div class="big-underline-round bg-white"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <img src="imgs/service1.png">
+                </div>
+                <div class="item service2">
+                    <a href="#" class="nounderline">
+                        <div class="icon"><img src="imgs/icon-service2.png"></div>
+                        <div class="detail-service">
+                            <div>INTERNET &ensp; &ensp; &ensp; VÀ TIỆN ÍCH</div>
+                            <div class="big-underline-round bg-white"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <img src="imgs/service2.png">
+                </div>
+                <div class="item">
+                    <img src="imgs/service3.png">
+                </div>
+                <div class="item service3">
+                    <a href="#" class="nounderline">
+                        <div class="icon"><img src="imgs/icon-service3.png"></div>
+                        <div class="detail-service">
+                            <div>THÔNG TIN &ensp; HÀNH TRÌNH</div>
+                            <div class="big-underline-round bg-white"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <img src="imgs/service4.png">
+                </div>
+                <div class="item service4">
+                    <a href="" class="nounderline">
+                        <div class="icon"><img src="imgs/icon-service4.png"></div>
+                        <div class="detail-service">
+                            <div>LIÊN LẠC &ensp; &ensp; KHẨN CẤP</div>
+                            <div class="big-underline-round bg-white"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 mb-5 full-container">
+        <div class="mb-5 mt-5 center-text fs-28px">SỰ KHÁC BIỆT CỦA CHÚNG TÔI</div>
+        <div class="service-intro relative" style="background-color: #5DBAFC;">
+            <span class="sharp-icon absolute t-174-l120 color-sharp-01">#</span>
+            <span class="absolute service-intro-text font-weight-bold t95-r210 text-white">Vùng phủ rộng trong toàn khu vực Đông Nam Á đáp ứng hoạt động tầm xa của các tàu đánh bắt xa bờ.</span>
+        </div>
+        <div class="service-intro relative">
+            <span class="sharp-icon absolute t-174-r130 color-sharp-02">#</span>
+            <span class="absolute service-intro-text font-weight-bold t95-l90 text-dark"> Các dịch vụ gia tăng hỗ trợ ngư dân các thông tin cần thiết như: dự báo thời tiết, thông tin an toàn cứu nạn, cập nhật tin tức, chính sách, thông tin giải trí,…</span>
+        </div>
+        <div class="service-intro relative" style="background-color: #489EDB;">
+            <span class="sharp-icon absolute t-174-l120 color-sharp-03">#</span>
+            <span class="absolute service-intro-text font-weight-bold t95-r210 text-white">Thông tin thoại kết nối trực tiếp đến các số máy trên bờ và các tàu khác với độ tin cậy cao, chất lượng thoại đáp ứng yêu cầu.</span>
+        </div>
+        <div class="service-intro relative">
+            <span class="sharp-icon absolute t-174-r130 color-sharp-02">#</span>
+            <span class="absolute service-intro-text font-weight-bold t95-l90 text-dark"> Hỗ trợ các chủ tàu quản lý đội tàu, các hoạt động đánh bắt, nâng cao hiệu quả và đảm bảo an toàn.</span>
+        </div>
+        <div class="service-intro relative" style="background-color: #226AB2;;">
+            <span class="sharp-icon absolute t-174-l120 color-sharp-04">#</span>
+            <span class="absolute service-intro-text font-weight-bold t95-r210 text-white">Tạo ra kênh tương tác 2 chiều giữa tàu cá và cơ quan quản lý, giúp cho công tác hỗ trợ và quản lý được tin cậy và hiệu quả hơn.</span>
+        </div>
+        <div class="service-intro relative">
+            <span class="sharp-icon absolute t-174-r130 color-sharp-02">#</span>
+            <span class="absolute service-intro-text font-weight-bold t95-l90 text-dark">Thông tin liên lạc, vị trí đánh bắt và hành trình đi biển hoàn toàn được bảo mật.</span>
+        </div>
+    </div>
+    <%- include('form-contact')%>
+</section>        
+<%- include('footer')%>
+<script type="text/javascript" src="libs/js/userscript.js"></script> 
+<script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaj0mHlR-keu-9hsR6d-gB0L9BclG04rk&callback=initMap">
+</script>
+<!--
+    Script này mà để trong head sẽ không chạy được alert mà chỉ chạy được sweetalert2
+    <script type="text/javascript" src="libs/js/script.js"></script>
+-->
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3">
+                    <a href="/admin/themdichvu">Thêm dịch vụ</a> /
+                    <a href="/admin/themkhuyenmai">Thêm chương trình khuyến mãi</a>
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">
+                        <%= title%>
+                    </li>
+                </ol>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="fs-20px">
+                                    <i class="fas fa-table mr-1"></i>
+                                    <span class="font-weight-bolder text-info">
+                                        <% tendichvu.map(function (e) { %>
+                                            <%- e.tendichvu%>
+                                        <% })%>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th width="8%">ID</th>
+                                            <th>Mã dịch vụ</th>
+                                            <th>Giá</th>
+                                            <th>Is_active</th>
+                                            <th>Trạng thái</th>
+                                            <th>Chi tiết</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th width="8%">ID</th>
+                                            <th>Mã dịch vụ</th>
+                                            <th>Giá</th>
+                                            <th>Is_active</th>
+                                            <th>Trạng thái</th>
+                                            <th>Chi tiết</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <% dichvucon.map(function(e) { %>
+                                                <tr>
+                                                    <td class="index_of_row"></td>
+                                                    <td><%- e.madichvucon%></td>
+                                                    <td><%- e.gia%></td>
+                                                    <td><%- e.is_active%></td>
+                                                    <td width="12%"><%- e.trangthai%></td>
+                                                    <td width="12%"><a href="/admin/dichvu/chitiet/<%- e.iddichvucon%>">Xem</a></td>
+                                                </tr>
+                                            <% })%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="fs-20px">
+                                    <i class="fas fa-percent mr-1"></i>
+                                    <span class="font-weight-bolder text-info">Chương trình khuyến mãi</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                                            <thead>
+                                            <tr>
+                                                <th width="10%">ID</th>
+                                                <th>Mã CTKM</th>
+                                                <th width="10%">% KM</th>
+                                                <th width="17%">Ngày bắt đầu</th>
+                                                <th width="17%">Ngày kết thúc</th>
+                                                <th width="10%">Is_active</th>
+                                                <th width="10%">Chi tiết</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th width="10%">ID</th>
+                                                <th>Mã CTKM</th>
+                                                <th width="10%">% KM</th>
+                                                <th width="17%">Ngày bắt đầu</th>
+                                                <th width="17%">Ngày kết thúc</th>
+                                                <th width="10%">Is_active</th>
+                                                <th width="10%">Chi tiết</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <% ctkm.map(function(e) { %>
+                                                    <tr>
+                                                        <td class="index_of_row"></td>
+                                                        <td><%- e.mactkm%></td>
+                                                        <td><%- e.phantramkhuyenmai%></td>
+                                                        <td><%- e.ngaybatdau%></td>
+                                                        <td><%- e.ngayketthuc%></td>
+                                                        <td><%- e.is_active%></td>
+                                                        <td><a href="/admin/dichvu/khuyenmai/chitiet/<%- e.idctkm%>">Xem</a></td>
+                                                    </tr>
+                                                <% })%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    $(document).ready(function() {
+        // phải để hàm này trên hàm dataTable hoặc ngoài ready function để sử dụng được chức năng sort
+        for(var i=0;i<$('tbody').length;i++) {
+            for(var j = 0;j<$('tbody')[i].getElementsByTagName('tr').length;j++) {
+                $('tbody')[i].getElementsByClassName('index_of_row')[j].innerText = j+1;
+            }
+        }
+        $('#dataTable').DataTable( {
+            "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+            "columnDefs": [
+                { type: "num", targets: 0 },
+            ],
+        } )
+        $('#dataTable1').DataTable( {
+            "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+            "columnDefs": [
+                { type: "num", targets: 0 },
+            ]
+        } )
+    });
+</script>
+<style>
+
+</style>
+</body>
+</html>

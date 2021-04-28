@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <%- include('headlink')%>
+</head>
+<body>
+<%- include('header')%>    
+<section>
+    <%- include('slideshow')%>
+    <div class="container mt-5">
+        <div class="small-container">
+            <div class="news-list">
+                <% tintuc.map(function(e){ %>
+                    <div class="news-item relative">
+                        <div class="news-img">
+                            <img style="border-radius: 5px;" src="<%- e.anhdaidien%>">
+                        </div>
+                        <div class="fs-16px absolute font-weight-bold mt-30px" style="width: 280px;">
+                            <%- e.tieude%>
+                        </div>
+                        <div class="fs-16px absolute b0" style="color: #EB6C10;text-decoration: underline;">
+                            <i><a href="/tintuc/<%- e.idnhomtintuc_cap1%>/chitiet/<%- e.idtintuc%>">Xem thêm</a></i>
+                        </div>
+                    </div>
+                <% })%>
+            </div>
+        </div>
+        <%- include('pagination')%>
+    </div>
+    <%- include('form-contact')%>
+</section>        
+<%- include('footer')%>
+<script type="text/javascript" src="libs/js/userscript.js"></script> 
+<script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaj0mHlR-keu-9hsR6d-gB0L9BclG04rk&callback=initMap">
+</script>
+<!--
+    Script này mà để trong head sẽ không chạy được alert mà chỉ chạy được sweetalert2
+    <script type="text/javascript" src="libs/js/script.js"></script>
+-->
+</body>
+</html>

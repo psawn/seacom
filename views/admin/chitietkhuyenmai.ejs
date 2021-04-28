@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3">
+                    <a href="/admin/themdichvu">Thêm dịch vụ</a> /
+                    <a href="/admin/themkhuyenmai">Thêm chương trình khuyến mãi</a>
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"> 
+                        Khuyến mại 
+                    </li>
+                    <li class="breadcrumb-item active"> 
+                        <% ctkm.map(function (e) { %>
+                            <a href="/admin/dichvu/<%- e.iddichvu%>"><%- e.tendichvu%></a>
+                        <% })%>
+                    </li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="fs-20px">
+                            <i class="fas fa-edit mr-1" ></i>
+                            <span class="font-weight-bolder text-info">Chi tiết khuyến mại</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="form_sua" action="/admin/dichvu/khuyenmai/sua" method="post" autocomplete="off">
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+                                        <td width="16.67%" class="font-weight-bolder">
+                                            <div class="container-fluid">Mã CTKM</div>
+                                        </td>
+                                        <td width="16.67%">
+                                            <% ctkm.map(function (e) { %>
+                                               <input name="mactkm" class="container-fluid" value="<%- e.mactkm%>">
+                                                <input name="idctkm" class="container-fluid" value="<%- e.idctkm%>" readonly hidden>
+                                            <% })%>
+                                        </td>
+                                        <td width="16.67%" class="font-weight-bolder">
+                                            <div class="container-fluid">Phần trăm KM</div>
+                                        </td>
+                                        <td width="16.67%">
+                                            <% ctkm.map(function (e) { %>
+                                               <input id="phantramkhuyenmai" name="phantramkhuyenmai" class="container-fluid" value="<%- e.phantramkhuyenmai%>">
+                                            <% })%>
+                                        </td>
+                                        <td width="16.67%" class="font-weight-bolder">
+                                            <div class="container-fluid">Is active</div>
+                                        </td>
+                                        <td width="16.67%">
+                                            <% ctkm.map(function (e) { %>
+                                                <div id="check_is_active" hidden><%- e.is_active%></div>
+                                                <select name="is_active" id="is_active">
+                                                   <option id="status_active1"><%- e.is_active%></option>
+                                                   <option id="status_active2"></option>
+                                                </select>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Ngày bắt đầu</div>
+                                        </td>
+                                        <td colspan="2">
+                                            <% ctkm.map(function (e) { %>
+                                               <input id="ngaybatdau" class="container-fluid" name="ngaybatdau" min="2000-01-01" max="2099-12-31" type="date" value="<%- e.ngaybatdau%>"
+                                            <% })%>
+                                        </td>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Ngày kết thúc</div>
+                                        </td>
+                                        <td colspan="2">
+                                            <% ctkm.map(function (e) { %>
+                                                <input id="ngayketthuc" class="container-fluid" name="ngayketthuc" min="2000-01-01" max="2099-12-31" type="date" value="<%- e.ngayketthuc%>"
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Tiêu đề</div>
+                                        </td>
+                                        <td colspan="5">
+                                            <% ctkm.map(function (e) { %>
+                                               <textarea name="tieude" class="container-fluid" rows="3"><%- e.tieude%></textarea>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Nội dung</div>
+                                        </td>
+                                        <td colspan="5">
+                                            <% ctkm.map(function (e) { %>
+                                                <textarea name="noidung" class="container-fluid" rows="15"><%- e.noidung%></textarea>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button id="btn_sua"" type="submit" class="btn btn-primary mt-3" style="width: 20%;float: right">Chỉnh sửa</button>
+                        </form>
+                        <form id="form_xoa" action="/admin/dichvu/khuyenmai/xoa" method="post">
+                            <% ctkm.map(function (e) { %>
+                                <input name="idctkm" class="container-fluid" value="<%- e.idctkm%>" readonly hidden>
+                            <% })%>
+                            <button id="btn_xoa" type="submit" class="btn btn-primary mt-3" style="width: 20%;float: left" onclick="alert_delete()">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mb-4 mt-5">
+                    <div class="card-header">
+                        <div class="fs-20px">
+                            <i class="fas fa-edit mr-1" ></i>
+                            <span class="font-weight-bolder text-info">Dịch vụ áp dụng</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="form_apdung" action="/admin/dichvu/khuyenmai/apdung" method="post" autocomplete="off">
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+                                        <td width="30%" class="font-weight-bolder">
+                                            <div class="container-fluid">
+                                                Áp dụng dịch vụ
+                                                <input name="idctkm" value="<%- CTKMID%>" readonly hidden>
+                                                <select name="madichvucon" class="ml-2">
+                                                    <% madichvucon.map(function (e) { %>
+                                                        <option><%- e.madichvucon%></option>
+                                                    <% })%>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <% ctkm_dichvu.map(function (e) { %>
+                                                <div class="float-left mr-5"><div class="bg-primary text-white rounded relative dichvu_item pt-1 pb-1"><%= e.madichvucon %>
+                                                        <a id="btn_bo_apdung" onclick="alert_boapdung(event)" href="/admin/dichvu/khuyenmai/boapdung/<%- e.id%>"><i class="fas fa-minus-square text-danger absolute btn_bo_apdung fs-20px"></i></a>                      
+                                                    </div>
+                                                </div>
+                                            <% } )%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3" style="width: 20%;float: left" id="btn_apdung">Áp dụng</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    /* Code lỗi -> x sẽ lấy giá trị trước khi type rồi mới alert chứ không phải sau khi type
+    var x = document.getElementById('phantramkhuyenmai').value;
+    $('#btn_sua').click(function () {
+        
+        alert(x);
+    });
+    */
+    
+    $('#btn_sua').click(function () {
+        var phantram = document.getElementById('phantramkhuyenmai').value;
+        if(phantram<0||phantram>100||isNaN(phantram)) {
+            alert_phantram();
+            return false;
+        }
+        var ngaybatdau = new Date(document.getElementById('ngaybatdau').value).getTime();
+        var ngayketthuc = new Date(document.getElementById('ngayketthuc').value).getTime();
+        if(ngayketthuc<ngaybatdau) {
+            alert_time();
+            return false;
+        } 
+    });
+    $('#btn_apdung').click(function () {
+        if(document.getElementById('check_is_active').innerText=='true') {
+            $('#form_apdung').submit();
+        } else {
+            alert_is_activate();
+            return false;
+        }
+    });
+    // onclick function khong hoat dong voi jquery
+
+    if(document.getElementById("status_active1")) {
+        if(document.getElementById("status_active1").innerHTML=='true') {
+            document.getElementById("status_active2").innerHTML = "false";
+        }
+        if(document.getElementById("status_active1").innerHTML=='false') {
+            document.getElementById("status_active2").innerHTML = "true";
+        }
+    }
+
+    if(document.getElementById("status1")){
+        if(document.getElementById("status1").innerHTML=='true') {
+            document.getElementById("status2").innerHTML = "false";
+        }
+        if(document.getElementById("status1").innerHTML=='false') {
+            document.getElementById("status2").innerHTML = "true";
+        }
+    }
+    $('#btn_xoa').click(function () {
+        return false;
+    })
+
+    
+</script>

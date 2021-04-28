@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết tin tức</title>
+    <%- include('headlink')%>
+</head>
+<body>
+<%- include('header')%>    
+<section>
+    <%- include('slideshow')%>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 " style="margin-top:35px;margin-bottom:30px">
+                <ul style="list-style: none;padding: 0;" class="center-text">
+                    <% nhomtintuc_cap1.map(function(e){ %>
+                        <a id=<%- e.idnhomtintuc_cap1%> class="field-news" href="/tintuc/<%- e.idnhomtintuc_cap1%>">
+                            <li><%- e.tennhomtintuc_cap1%></li>
+                        </a>
+                    <% })%>
+                </ul>
+            </div>
+        </div>
+        <div class="row" style="margin-top:40px">
+            <!--Trong bootstrap nếu nhét col nhỏ trong col-12 thì các tag có class là col nhỏ sẽ xuống dòng-->
+            <% tintuc.map(function(e){ %>
+                <div class="col-md-8">
+                    <div class="fs-25px font-weight-bold col-md-12">
+                        <%- e.tieude%>
+                    </div>
+                    <div class="news-date col-md-12">
+                        Ngày <%- e.ngaydang%>
+                    </div>
+                    <div class="col-md-12 news-title">
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <img class="mt-4 img-content" src="<%- e.anhnoidung%>">
+                        <figcaption class="caption">
+                            <i><%- e.caption%></i>
+                        </figcaption>
+                    </div>
+                    <div class="col-md-12 news-content pre-line">
+                        <%- e.noidung%>
+                    </div>
+                    
+                </div>
+            <% })%>
+            
+            <div class="col-md-4">
+                <div style="width:330px;margin: auto;background-color: #E8E8E8;border: 1px solid #C4C4C4;">
+                    <div class="news-suggest">
+                        Tin tức nổi bật khác
+                    </div>
+                    <% tintuclienquan.map(function(e){ %>
+                        <div class="suggest-block">
+                            <div class="suggest-block-img">
+                                <a href="#">
+                                    <img src="<%- e.anhdaidien%>">
+                                </a>
+                            </div>
+                            <div class="suggest-block-content">
+                                <div>
+                                    <a href="/tintuc/<%- e.idnhomtintuc_cap1%>/chitiet/<%- e.idtintuc%>">
+                                        <div class="suggest-block-title"><%- e.tieude%></div>
+                                    </a>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    <% })%>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>        
+<%- include('footer')%>
+<script type="text/javascript" src="libs/js/userscript.js"></script> 
+<script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaj0mHlR-keu-9hsR6d-gB0L9BclG04rk&callback=initMap">
+</script>
+<!--
+    Script này mà để trong head sẽ không chạy được alert mà chỉ chạy được sweetalert2
+    <script type="text/javascript" src="libs/js/script.js"></script>
+-->
+</body>
+</html>

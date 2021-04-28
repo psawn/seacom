@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4"></h1>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="fs-20px">
+                                    <i class="fas fa-question-circle mr-1"></i>
+                                    <span class="font-weight-bolder text-info">
+                                        Thông tin khách hàng
+                                    </span>
+                                    <% max.map(function(e) { %>
+                                       <span class="max" id="<%- e.max%>"></span>
+                                    <% })%>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%">ID</th>
+                                                    <th>Tên công ty</th>
+                                                    <th>Người liên hệ</th>
+                                                    <th>Email</th>
+                                                    <th>Số điện thoại</th>
+                                                    <th>Tin nhắn</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Tên công ty</th>
+                                                    <th>Người liên hệ</th>
+                                                    <th>Email</th>
+                                                    <th>Số điện thoại</th>
+                                                    <th>Tin nhắn</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <% lienhekhachhang.map(function(e) { %>
+                                                    <tr>
+                                                        <td><%- e.id%></td>
+                                                        <td><%- e.tencongty%></td>
+                                                        <td><%- e.tennguoilienhe%></td>
+                                                        <td><%- e.email%></td>
+                                                        <td><%- e.sdt%></td>
+                                                        <td id="<%- e.id%>" onClick="show_massage(this.id)" style="cursor: pointer;color: #007bff">Xem</td>
+                                                    </tr>
+                                                <% })%>
+                                            </tbody>
+                                        </table>
+                                        <% lienhekhachhang.map(function(e) { %>     
+                                            <table hidden id="<%- e.id%>" class="table table-bordered mt-3 table-detail" width="100%" cellspacing="0">
+                                                <tr>
+                                                    <th width="15%">ID</th>
+                                                    <th width="15%">Ngày gửi</th>
+                                                    <th class="position-relative">Nội dung tin nhắn
+                                                        <i class="fas fa-times-circle position-absolute r0-t0 btn-hide" id="<%- e.id%>" onClick="hide_massage(this.id)"></i>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td><%- e.id%></td>
+                                                    <td></td>
+                                                    <td><%- e.tinnhan%></td>
+                                                </tr>
+                                            </table>
+                                        <% })%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    max = document.getElementsByClassName("max")[0].id;
+    $('#dataTable').DataTable( {
+        "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+        "columnDefs": [
+            { type: "num", targets: 0 },
+        ],
+        
+    });
+    $('#dataTable').on('page.dt', function (e){
+        for(var i=0;i<max;i++) {
+            if(document.getElementsByClassName("table-detail")[i]) {
+                document.getElementsByClassName("table-detail")[i].hidden = true;
+            }
+        }
+        e.preventDefault();
+    }).DataTable();
+    //var table = $('#dataTable').dataTable();
+    //console.log(table.fnGetData().length);
+    
+    function show_massage(clicked_id){
+        for(var i=0;i<max;i++) {
+            if(document.getElementsByClassName("table-detail")[i]) {
+                if(document.getElementsByClassName("table-detail")[i].id!=clicked_id){
+                    document.getElementsByClassName("table-detail")[i].hidden = true;
+                } else {
+                    document.getElementsByClassName("table-detail")[i].hidden = false;
+                }
+            }
+        }
+    }
+    function hide_massage(clicked_id){
+        for(var i=0;i<max;i++) {
+            if(document.getElementsByClassName("table-detail")[i]){
+                document.getElementsByClassName("table-detail")[i].hidden = true;
+            }
+        }
+    }
+</script>
+<style>
+
+</style>
+</body>
+</html>

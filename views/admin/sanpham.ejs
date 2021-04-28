@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3 ">
+                    <a href="/admin/themsanpham">Thêm sản phẩm </a>
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">
+                        <% if (title!=null) { %>
+                            <%- title %>
+                        <% } %>
+                    </li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div>
+                            <i class="fas fa-table mr-1 fs-20px"></i>
+                            <span class="font-weight-bolder text-info fs-20px">
+                                <% nhomsanphamhientai.map(function(e){ %>
+                                    <%- e.tennhomsanpham%>
+                                <% })%>
+                            </span> 
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%">ID</th>
+                                            <th>Mã sản phẩm</th>
+                                            <th width="20%">Giá</th>
+                                            <th width="12%">Is active</th>
+                                            <th width="12%">Trạng thái</th>
+                                            <th width="12%">Chi tiết</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th width="10%">ID</th>
+                                            <th>Mã sản phẩm</th>
+                                            <th width="20%">Giá</th>
+                                            <th width="12%">Is active</th>
+                                            <th width="12%">Trạng thái</th>
+                                            <th width="12%">Chi tiết</th>
+                                        </tr>
+                                        </tfoot>
+                                    <tbody>
+                                        <% sanpham.map(function(e){ %>
+                                            <tr>
+                                                <td><%- e.idsanpham%></td>
+                                                <td><%- e.masanpham%></td>
+                                                <td><%- e.gia%></td>
+                                                <td><%- e.is_active%></td>
+                                                <td><%- e.trangthai%></td>
+                                                <td><a href="/admin/sanpham/chitiet/<%- e.idsanpham%>">Xem</a></td>
+                                            </tr>
+                                        <% })%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    $(document).ready(function() {
+        /*
+        // ajax lỗi
+        $('button').on('click', function(){
+            $.ajax({
+                url: "http://localhost:5000/data/1/1",
+                method: "GET",
+                data:{
+                    title: "Bóng đá"
+                },
+                success: function (rs) {
+                    rs.recordsets[0].map(function(e) {
+                        var tr_html = "<tr class=\"data\">\n" +
+        "                                                <td class=\"index_of_row\"></td>\n" +
+        "                                                <td>"+e.idtintuc+"</td>\n" +
+        "                                                <td>"+e.idtintuc+"</td>\n" +
+        "                                                <td>"+e.idtintuc+"</td>\n" +
+        "                                                <td>\n" +
+        "                                                    <a style=\"float: left\" href=\"/tintuc/chitiet/"+e.idtintuc+"\">\n" +
+        "                                                        Xem\n" +
+        "                                                        <div class=\"danhmuc_cap2\">\n" +
+        "                                                            "+e.idtintuc+"\n" +
+        "                                                        </div>\n" +
+        "                                                    </a>\n" +
+        "                                                </td>\n" +
+        "                                            </tr>";
+                        document.getElementById("bigdata").innerHTML += tr_html;
+                    })
+                }
+            })
+        })
+        */
+
+        var rowState ;
+        var table = null;       
+        // phải để hàm này trên hàm dataTable hoặc ngoài ready function để sử dụng được chức năng sort
+        for(var i=0;i<$('tbody').length;i++) {
+            for(var j = 0;j<$('tbody')[i].getElementsByTagName('tr').length;j++) {
+                $('tbody')[i].getElementsByClassName('index_of_row')[j].innerText = j+1;
+            }
+        }
+
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex, row, counter) {
+            if(rowState > 0)
+            {
+                var tr = table.row(dataIndex).nodes()[0];
+                return (rowState == 1? !($(tr).hasClass("selected")):($(tr).hasClass("selected")));
+            }
+            return true;
+        });
+
+        var table= $('#dataTable').DataTable( {
+            "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+            "language": {
+                "infoFiltered": "",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                // "infoFiltered": " - filtered from _MAX_ records"
+            }
+            
+        } ) 
+
+        var list = table.rows().nodes();
+
+        $( "#select" ).change(function () {
+            var i;
+            var listcon = $(this).children("option:selected").val();
+
+            for(i=0;i<list.length;i++) {
+                if(listcon!=parseInt(list[i].getElementsByClassName('danhmuc_cap2')[0].innerText)) {
+                    rowState = 1;
+                    list[i].classList.add('selected');
+                    table.draw();
+                } else { 
+                    //rowState = 0;
+                    list[i].classList.remove('selected');
+                    table.draw();
+                }
+            }    
+            if($(this).children("option:selected").val()==0) {
+                for(i=0;i<list.length;i++) {
+                    list[i].classList.remove('selected');
+                    table.draw();
+                }
+            }    
+        })
+    });
+
+    //$("#success-delete-alert").fadeOut(2000);
+    $("#success-delete-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+    });
+</script>
+</body>
+</html>

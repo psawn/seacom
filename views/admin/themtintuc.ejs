@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3">
+                    &nbsp; 
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">
+                        Tin tức
+                     </li>
+                     <li class="breadcrumb-item active">
+                        Thêm
+                     </li>
+                </ol>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="fs-20px">
+                                    <i class="fas fa-table mr-1"></i>
+                                    <span class="font-weight-bolder text-info">
+                                    Thêm tin tức
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="/admin/themtintuc" method="post" autocomplete="off">
+                                    <div class="table-responsive">
+                                        <table>
+                                            <tr>
+                                                <td width="25%" class="font-weight-bolder "><div class="container-fluid">Ngày đăng</div></td>
+                                                <td width="25%">
+                                                    <input type="date" name="ngaydang" class="container-fluid date" type="date" required>
+                                                </td>
+                                                <td width="25%" class=" font-weight-bolder">
+                                                    <div class="container-fluid">
+                                                        Is_active
+                                                    </div>
+                                                </td>
+                                                <td width="25%">
+                                                    <select name="is_active" class="container-fluid">
+                                                        <option id="status_active1" value="true">true</option>
+                                                        <option id="status_active2" value="false">false</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bolder"><div class="container-fluid">Thư mục cha</div></td>
+                                                <td colspan="1">
+                                                    <select name="thumuccha" class="container-fluid danhmuccha" style="width: 220px">
+                                                        <% nhomtintuc.map(function (e) { %>
+                                                            <option value="<%- e.idnhomtintuc_cap1%>">
+                                                                <%- e.tennhomtintuc_cap1%>
+                                                            </option>
+                                                        <% })%>
+                                                    </select>
+                                                </td>
+                                                <td class="font-weight-bolder"><div class="container-fluid">Thư mục con</div></td>
+                                                <td colspan="1">
+                                                    <select name="thumuccon" class="container-fluid danhmuccon" style="width: 220px">
+                                                        <% nhomtintuc_cap2.map(function (e) { %>
+                                                            <option id="<%- e.idnhomtintuc_cap1%>" value="<%- e.idnhomtintuc_cap2%>" >
+                                                                <%- e.tennhomtintuc_cap2%>
+                                                            </option>
+                                                        <% })%>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bolder"><div class="container-fluid">Tiêu đề</div></td>
+                                                <td colspan="5">
+                                                        <input name="tieude" value="" class="container-fluid" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bolder"><div class="container-fluid">Nội dung</div></td>
+                                                <td colspan="5">
+                                                    <textarea name="noidung" class="container-fluid" rows="10" required></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bolder"><div class="container-fluid">Link ảnh đại diện</div></td>
+                                                <td colspan="5">
+                                                    <input name="anhdaidien" class="container-fluid">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-weight-bolder"><div class="container-fluid">Link ảnh nội dung</div></td>
+                                                <td colspan="5">
+                                                    <input name="anhnoidung" class="container-fluid">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-3" style="width: 20% ;float: right">Thêm</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+
+    
+
+    $(document).ready(function() {
+        $('#dataTable').DataTable( {
+            "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]]
+        } )
+    });
+
+    var listcha,list,i,a;
+    listcha = document.getElementsByClassName("danhmuccha");
+    listcon= document.getElementsByClassName("danhmuccon");
+
+    var i;
+
+    for(i=0;i<listcon[0].length;i++) {
+        if(listcon[0].getElementsByTagName("option")[i].id!=1) {
+            listcon[0].getElementsByTagName("option")[i].setAttribute('style','display:none');
+        }
+    }
+
+    $('.danhmuccha').on('change', function() {
+        for(i=0;i<listcon[0].length;i++) {
+            if($('.danhmuccha').val()!=listcon[0].getElementsByTagName("option")[i].id) {
+                listcon[0].getElementsByTagName("option")[i].setAttribute('style','display:none');
+                listcon[0].getElementsByTagName("option")[i].removeAttribute('selected');
+            } else {
+                listcon[0].getElementsByTagName("option")[i].setAttribute('style','display:');
+            }
+        }
+        for(i=0;i<listcon[0].length;i++){
+            if($('.danhmuccha').val()==listcon[0].getElementsByTagName("option")[i].id) {
+                listcon[0].getElementsByTagName("option")[i].setAttribute('selected','selected');
+                break;
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

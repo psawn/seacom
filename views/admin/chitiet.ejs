@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3">
+                    <a href="/admin/themtintuc">Thêm tin tức</a>
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item">Tin tức</li>
+                    <li class="breadcrumb-item active">
+                        <% tendanhmuc.map(function (e){ %>
+                            <a href="/admin/tintuc/<%- e.idnhomtintuc_cap1%>"><%- e.tennhomtintuc_cap1%></a>
+                        <% })%>
+                    </li>
+                    
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-edit mr-1"></i>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/tintuc/chitiet/sua" method="post" autocomplete="off">
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+                                        <td width="16.67%" class="font-weight-bolder"><div class="container-fluid">ID</div></td>
+                                        <td width="16.67%"><% tintuc.map(function (e) { %>
+                                                <input name="idtintuc" class="container-fluid" value="<%- e.idtintuc%>" readonly="readonly">
+                                                <div style="display: none" id="iddanhmuc_cap1"><%- e.idnhomtintuc_cap1%></div>
+                                                <div style="display: none" id="iddanhmuc_cap2"><%- e.idnhomtintuc_cap2%></div>
+                                            <% })%></td>
+                                        <td width="16.67%" class="font-weight-bolder "><div class="container-fluid">Ngày đăng</div></td>
+                                        <td width="16.67%"><% tintuc.map(function (e) { %>
+                                                <% tintuc.map(function (e) { %>
+                                                    <input class="container-fluid" name="ngaydang" main="2000-01-01" max="2099-12-31" type="date" value="<%- e.ngaydang%>">                    
+                                                <% })%>
+                                            <% })%></td>
+                                        <td width="16.67%" class=" font-weight-bolder"><div class="container-fluid">
+                                                Is_active
+                                            </div></td>
+                                        <td width="16.67%">
+                                            <select class="container-fluid" name="is_active">
+                                                <% tintuc.map(function (e) { %>
+                                                    <option id="status_active1"><%- e.is_active%></option>
+                                                    <option id="status_active2"></option>
+                                                <% })%>
+                                                
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder"><div class="container-fluid">Thư mục cha</div></td>
+                                        <td colspan="2">
+                                            <select name="thumuccha" class="container-fluid danhmuccha" style="width: 220px">
+                                                <% nhomtintuc_cap1.map(function (e) { %>
+                                                    <option value="<%- e.idnhomtintuc_cap1%>">
+                                                        <%- e.tennhomtintuc_cap1%>
+                                                    </option>
+                                                <% })%>
+                                            </select>
+                                        </td>
+                                        <td class="font-weight-bolder"><div class="container-fluid">Thư mục con</div></td>
+                                        <td colspan="2">
+                                            <select name="thumuccon" class="container-fluid danhmuccon" style="width: 220px">
+                                                <% nhomtintuc_cap2.map(function (e) { %>
+                                                    <option id="<%- e.idnhomtintuc_cap1%>" value="<%- e.idnhomtintuc_cap2%>" >
+                                                        <%-e.tennhomtintuc_cap2%>
+                                                    </option>
+                                                <% })%>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Tiêu đề</div>
+                                        </td>
+                                        <td colspan="5">
+                                            <% tintuc.map(function (e) { %>
+                                                <input name="tieude" value="<%= e.tieude %>" class="container-fluid">
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder"><div class="container-fluid">Nội dung</div></td>
+                                        <td colspan="5">
+                                            <% tintuc.map(function (e) { %>
+                                            <textarea name="noidung" class="container-fluid" rows="10"><%-e.noidung %></textarea>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder"><div class="container-fluid">Ảnh đại diện</div></td>
+                                        <td colspan="5">
+                                            <% tintuc.map(function (e) { %>
+                                                <textarea name="anhdaidien" class="container-fluid" rows="2"><%- e.anhdaidien%></textarea>
+                                                <img class="container-fluid" src="<%-e.anhdaidien %>" style="max-width:200px">
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder"><div class="container-fluid">Ảnh nội dung</div></td>
+                                        <td colspan="5">
+                                            <% tintuc.map(function (e) { %>
+                                                <textarea name="anhnoidung" class="container-fluid" rows="2"><%- e.anhnoidung%></textarea>
+                                                <img class="container-fluid" src="<%-e.anhnoidung %>" style="max-width:200px">
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder"><div class="container-fluid">Caption ảnh</div></td>
+                                        <td colspan="5">
+                                            <% tintuc.map(function (e) { %>
+                                                <textarea name="caption" class="container-fluid" rows="2"><%- e.caption%></textarea>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3" style="width: 20% ;float: right">Chỉnh sửa</button>
+                        </form>
+                        <form id="form_xoa" action="/admin/tintuc/chitiet/xoa" method="post" autocomplete="off">
+                            <% tintuc.map(function (e) { %>
+                                <input name="idtintuc" value="<%- e.idtintuc%>" hidden readonly>
+                            <% })%>
+                            <button id="btn_xoa" type="submit" class="btn btn-primary mt-3" style="width: 20%;float: left" onclick="alert_delete()">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    /*
+    <input type="file" accept="image/*" onchange="loadFile(event)">
+    <img id="output"/>
+
+    var loadFile1 = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output1 = document.getElementById('output1');
+            output1.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('output');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    */
+    $(document).ready(function() {
+
+        /*
+        var listDate = document.getElementsByClassName("date");
+        for(var i=0;i<listDate.length;i++) {
+            var e = new Date(Date.parse(document.getElementsByClassName("date")[i].value));
+            document.getElementsByClassName("date")[i].value = e.toLocaleDateString('en-GB');
+        }
+         */
+
+        $('#dataTable').DataTable( {
+            "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]]
+        } )
+
+        var listcha,list,i,a;
+        listcha = document.getElementsByClassName("danhmuccha");
+        listcon= document.getElementsByClassName("danhmuccon");
+
+        // select thu muc cha khi loadtrang
+        for (i=0;i<listcha[0].length;i++) {
+            if(parseInt(document.getElementById("iddanhmuc_cap1").innerHTML)==listcha[0].getElementsByTagName("option")[i].value) {
+                listcha[0].getElementsByTagName("option")[i].setAttribute('selected','selected');
+                break;
+            }
+        }
+
+        // select thu muc con khi load trang
+        for(i=0;i<listcon[0].length;i++){
+            if(listcon[0].getElementsByTagName("option")[i].id==$('.danhmuccha').val()){
+                listcon[0].getElementsByTagName("option")[i].setAttribute('style','display');
+            } else {
+                listcon[0].getElementsByTagName("option")[i].setAttribute('style','display:none');
+            }
+            if(listcon[0].getElementsByTagName("option")[i].value==document.getElementById("iddanhmuc_cap2").innerHTML) {
+                listcon[0].getElementsByTagName("option")[i].setAttribute('selected','selected');
+            }
+        }
+        // select thu muc con khi thay doi thu muc cha
+        $('.danhmuccha').on('change', function() {
+            for(i=0;i<listcon[0].length;i++) {
+                if($('.danhmuccha').val()!=listcon[0].getElementsByTagName("option")[i].id) {
+                    listcon[0].getElementsByTagName("option")[i].setAttribute('style','display:none');
+                    listcon[0].getElementsByTagName("option")[i].removeAttribute('selected');
+                } else {
+                    listcon[0].getElementsByTagName("option")[i].setAttribute('style','display:');
+                }
+
+            }
+            for(i=0;i<listcon[0].length;i++){
+                if($('.danhmuccha').val()==listcon[0].getElementsByTagName("option")[i].id) {
+                    listcon[0].getElementsByTagName("option")[i].setAttribute('selected','selected');
+                    break;
+                }
+            }
+        });
+
+        // option true/false
+        if(document.getElementById("status_active1").innerHTML=='true') {
+            document.getElementById("status_active2").innerHTML = "false";
+        }
+        if(document.getElementById("status_active1").innerHTML=='false') {
+            document.getElementById("status_active2").innerHTML = "true";
+        }
+
+        $('#btn_xoa').click(function () {
+           return false;
+        })
+    });
+
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,487 @@
+:root{
+    --main-blue:#005594;
+}
+*{
+    font-family: Roboto;
+}
+.menu {
+    margin-top:20px;
+    height: 145px;
+    width: 100%;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: left;
+}
+.logo {
+    float: left;
+}
+.logo img {
+    width:210px
+}
+.nav {
+    float: right;
+    margin-top: 25px;
+}
+.nav ul li {
+    margin-right: 25px;
+}
+.nav ul li:last-child {
+    margin-right: -15px;
+}
+.absolute {
+    position: absolute;
+}
+.relative {
+    position: relative;
+}
+.l7-t45 {
+    left:7%;
+    top:45%  
+}
+.detail-btn {
+    font-weight: 400;
+    font-size: 25px;
+    width: 288px;
+    text-align: center;
+    border: 1px solid #ffffff;
+}
+a.carousel-control-prev,a.carousel-control-next {
+    width: 7%;
+    
+}
+a.carousel-control-prev .carousel-control-prev-icon {
+    width: 30px;
+    height:30px;
+    background-color: rgba(209, 209, 209, 0.3);
+}
+.full-container {
+    width: 100%;
+    float: left;
+}
+.full-container img {
+    width: 100%;
+}
+.center-text{
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 35px;
+    color: var(--main-blue);
+}
+.service-list{
+    float: left;
+    width:100%;
+}
+.service {
+    float: left;
+    width: 100%;
+}
+.service-list .item {
+    position: relative;
+    float: left;
+    width: calc(100% / 4);
+}
+.item:before {
+    float: left;
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.item img {
+    float: left;
+    width: 100%;
+}
+.service1 {
+    background-color: #5dbafc;
+}
+.service2 {
+    background-color: #226ab2;
+}
+.service3 {
+    background-color: #489edb ;
+}
+.service4 {
+    background-color: #123669;
+}
+.detail-service {
+    width: 220px;
+    height: 80px;
+    margin-left: 60px;
+    margin-top: 220px;
+    font-size: 26px;
+    color: #ffffff;
+    font-weight: 600;
+}
+.item .icon {
+    margin-left: 60px;
+    margin-top: 60px;
+    float: left;
+    font-size: 125px;
+    color: #ffffff;
+}
+.big-underline-round {
+    height: 8px;
+    border-radius: 5px;
+    width: 130px;
+}
+.nounderline,a:hover {
+    text-decoration: none !important
+}
+.flex {
+    display:flex;
+}
+.flex .partner-list,.flex .completed-project{
+    width:50%;
+    float: left;
+    margin-left: 30px;
+}
+.column-title {
+    font-size: 30px;
+    width: 100%;
+    float: left;
+    margin-top:80px;
+    margin-bottom: 55px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    letter-spacing: 0.01em;
+    color: var(--main-blue);
+}
+.news-block {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.news-block .right {
+    width: 320px;
+    font-size:17px;
+    padding-left: 22px;
+    margin: auto;
+    line-height: 21px;
+}
+.align-center{
+    text-align: center;
+}
+.inside-container {
+    font-size:14px;
+    float: left;
+    margin: 0 auto;
+}
+.contact-info {
+    font-size:12px;
+}
+.text-color-blue {
+    color: var(--main-blue);
+}
+.input {
+    width: 680px;
+    border-radius: 10px;
+    box-shadow: 0px 3px #b4b4b4;
+    font-size: 24px;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+.fs-20px{
+    font-size: 20px;
+}
+.btn-send {
+    bottom: 8px;
+    right: -30px;
+    width: 200px;
+    height: 65px;
+    box-shadow: 0px 3px #b4b4b4;
+    background-color:var(--main-blue);
+    color: #ffffff;
+}
+.bg-yellow {
+    background-color: #EB6C10;
+    border: 4px solid #EB6C10;
+}
+.footer {
+    color:#ffffff;
+    font-weight:600;
+    padding: 10px 0;
+}
+.border-black {
+    border:1px solid #000000;
+}
+.language {
+    opacity: 0.2;
+    cursor: pointer;
+}
+.language_active {
+    opacity: 1;
+}
+.fs-28px {
+    font-size: 28px;
+}
+.fs-40px {
+    font-size:45px;
+}
+.mt-100px {
+    margin-top:100px;
+}
+.mt-70px {
+    margin-top:80px
+}
+.mt-30px {
+    margin-top:30px
+}
+.parts-disc {
+    width: 890px;
+    margin-left:110px;
+}
+.parts-disc td {
+    height:70px;
+    padding-left: 90px;
+}
+.detail-row {
+  height:60px;
+  line-height: 60px;
+}
+.short-width{
+  width: 38%;
+}
+.hight-width{
+  width: 61%;
+}
+.detial-title {
+    font-size:30px;
+    color: #035696;
+    font-weight:600;
+    margin-top:150px;
+}
+.detail-text-type{
+    color:#ffffff;
+    font-size:30px;
+}
+
+.pl-65px {
+    padding-left: 65px;
+}
+.mt-150px {
+    margin-top:150px
+}
+.field-news {
+    display: inline-block;
+    width: 240px;
+    height: 70px;
+    line-height: 70px;
+    background-color:#f2f2f2;
+    margin:0 20px 0 20px
+}
+.field-news2 {
+    display: inline-block;
+    width: 240px;
+    height: 70px;
+    line-height: 70px;
+    color: #ffffff;
+    opacity: 0.8;
+    background-color:#EB6C10;
+    margin:0 20px 0 20px
+}
+.fs-25px {
+    font-size: 25px;
+}
+.news-date {
+    margin-top:20px;
+    font-size:15px;
+}
+.news-suggest {
+    line-height: 60px;
+    height: 60px;
+    background-color: #EB6C10;
+    opacity: 0.8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+}
+.caption {
+    color: #5A5A5A;
+    width: 535px;
+    font-size: 18px;
+    margin: auto;
+}
+.news-content,.news-title {
+    font-size: 20px;
+}
+.suggest-block {
+    display: flex;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid #C4C4C4;
+    height: 160px;
+}
+.suggest-block-img {
+    width: 155px;
+    text-align: center;
+    margin: auto;
+}
+.suggest-block-img img {
+    width: 85%;
+    border-radius: 5px;
+}
+.suggest-block-content {
+    width: 160px;
+    font-size: 15px;
+    margin: auto;
+}
+.suggest-block-title {
+    font-weight: 700;
+    color: #000000;
+}
+/*
+// 2 kiểu css ra cùng 1 kết quả, xóa display:flex của small-container thì sẽ bị lêch -> chưa tìm đc lý do
+.small-container {
+    width: 1050px;
+    margin: auto;
+    display: flex;
+}
+.news-list{
+    width: 100%;
+    float: left;
+}
+.news-item {
+    width: calc(100% / 3);
+    margin-bottom: 70px;
+    float: left;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+*/
+.small-container {
+    width: 1050px;
+    margin: auto;
+
+}
+.news-list{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.news-item {
+    width: calc(100% /3);
+    height: 350px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 50px;
+}
+.news-img {
+    width: 280px;
+    height: 200px;
+}
+.news-img img {
+    width: 100%;
+    max-height: 200px;
+}
+.fs-16px{
+    font-size: 16px;
+}
+.fs-30px {
+    font-size: 30px;
+}
+.service-intro {
+    height: 300px;
+}
+.sharp-icon {
+    font-size: 420px;
+    padding-top:10px;
+}
+.color-sharp-01{
+    color: rgba(78, 78, 78, 0.1);
+}
+.color-sharp-02 {
+    color: rgba(128, 128, 128, 0.2);
+}
+.color-sharp-03{
+    color: rgba(78, 78, 78, 0.15);
+}
+.color-sharp-04{
+    color: rgba(78, 78, 78, 0.2);
+}
+.t-174-l120 {
+    top: -174px;
+    left: 120px;
+}
+.t-174-r130 {
+    top: -174px;
+    right: 130px;
+}
+.t95-r210 {
+    top: 95px;
+    right: 210px;
+}
+.t95-l90{
+    top:95px;
+    left: 90px;
+}
+.service-intro-text {
+    width: 660px;
+    font-size: 28px;
+}
+.dropdown-item  {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    color: #007bff !important;
+}
+.dropdown-item:hover{
+    color: #0056b3 !important;
+}
+.b0 {
+    bottom: 0;
+}
+.b0 i a {
+    color: #EB6C10;
+}
+.b25 {
+    bottom: 25px;
+}
+.img-content {
+    width: 100%;
+}
+.pre-line {
+    white-space: pre-line;
+}
+.pagination {
+    text-align: center;
+    margin: auto;
+    
+}
+.pagenumber {
+    font-size: 28px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-left: 25px;
+}
+.pagenumber a {
+    color: #000000;
+}
+.pagenumber_active{
+    background-color: #EB6C10;
+}
+.pagenumber_active a{
+    color: #ffffff;
+}
+.t100-r5p {
+    top:100px;
+    right:5%;
+}
+.nav-item img:hover {
+    cursor: pointer;
+}

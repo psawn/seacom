@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3">
+                    &nbsp; 
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Chương trình khuyến mại </li>
+                    <li class="breadcrumb-item active">Thêm </li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/themkhuyenmai" method="post" autocomplete="off">
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">
+                                                Mã CTKM
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <select class="container-fluid" name="iddichvu">
+                                                <% dichvu.map(function(e){ %>
+                                                    <option value="<%- e.iddichvu%>"><%- e.tendichvu%></option> 
+                                                <% })%>
+                                            </select>
+                                        </td>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">
+                                                Mã CTKM
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input name="mactkm" class="container-fluid" style="text-transform: uppercase;" required>
+                                        </td>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">
+                                                % khuyến mại
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input id="phantramkhuyenmai" name="phantramkhuyenmai" min="0" max="100" class="container-fluid" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="14.5%" class="font-weight-bolder">
+                                            <div class="container-fluid">Ngày bắt đầu</div>
+                                        </td>
+                                        <td colspan="2">
+                                            <input id="ngaybatdau" type="date" name="ngaybatdau" max="2099-12-31" min="2000-01-01" class="container-fluid date" required>
+                                        </td>
+                                        <td width="14.5%" class="font-weight-bolder">
+                                            <div class="container-fluid">Ngày kết thúc</div>
+                                        </td>
+                                        <td colspan="2">
+                                            <input id="ngayketthuc" type="date" name="ngayketthuc" max="2099-12-31" min="2000-01-01" class="container-fluid date" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Tiêu đề</div>
+                                        </td>
+                                        <td colspan="5">
+                                            <textarea name="tieude" class="container-fluid" rows="3" ></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Nội dung</div>
+                                        </td>
+                                        <td colspan="5">
+                                            <textarea name="noidung" class="container-fluid" rows="10" ></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button id="btn_them" type="submit" class="btn btn-primary mt-3" style="width: 20% ;float: right">Thêm</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    $('#btn_them').click(function(){
+        var phantram = document.getElementById('phantramkhuyenmai').value;
+        if(phantram<0||phantram>100||isNaN(phantram)) {
+            alert_phantram();
+            return false;
+        }
+        var ngaybatdau = new Date(document.getElementById('ngaybatdau').value).getTime();
+        var ngayketthuc = new Date(document.getElementById('ngayketthuc').value).getTime();
+        if(ngayketthuc<ngaybatdau) {
+            alert_time();
+            return false;
+        } 
+    })
+</script>
+</body>
+</html>

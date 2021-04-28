@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liên hệ</title>
+    <%- include('headlink')%>
+</head>
+<body>
+<%- include('header')%>    
+<section>
+    <%- include('slideshow')%>
+    <%- include('form-contact')%>
+</section>        
+<%- include('footer')%>
+<script type="text/javascript" src="libs/js/userscript.js"></script> 
+<script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaj0mHlR-keu-9hsR6d-gB0L9BclG04rk&callback=initMap">
+</script>
+<!--
+    Script này mà để trong head sẽ không chạy được alert mà chỉ chạy được sweetalert2
+    <script type="text/javascript" src="libs/js/script.js"></script>
+-->
+</body>
+</html>

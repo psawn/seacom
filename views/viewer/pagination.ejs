@@ -1,0 +1,65 @@
+<% if(a==1){ %>
+    <ul class="pagination justify-content-center mt-5">
+        <% var i = (Number(page) > 1 ? Number(page) - 1 : 1) %>
+        <% if (i !== 1) { %>
+            <li class=" pagenumber"><a>...</a></li>
+        <% } %>
+        <% for (; i <= (Number(page) + 2) && i < pageNumber; i++) { %>
+            <% if (i == page) { %>
+                <li class="pagenumber pagenumber_active"><a style="color: #ffffff;"><%= i %></a></li>
+            <% } else { %>
+                <li class="pagenumber"><a href="/tintuc/?page=<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(page) + 2 && i < pageNumber) { %>
+                <li class="disable pagenumber"><a>...</a></li>
+            <% } %>
+        <% } %>
+        <li class="pagenumber <% if(page==pageNumber){ %>
+            pagenumber_active
+        <%}%> "><a href="/tintuc/?page=<%= pageNumber %>"><%= pageNumber %></a></li>
+    </ul>
+<% } else if(a==0) { %>
+    <ul class="pagination justify-content-center mt-5">
+        <% var i = (Number(page) > 1 ? Number(page) - 1 : 1) %>
+        <% if (i !== 1) { %>
+            <li class=" pagenumber"><a>...</a></li>
+        <% } %>
+        <% for (; i <= (Number(page) + 2) && i < pageNumber; i++) { %>
+            <% if (i == page) { %>
+                <li class="pagenumber pagenumber_active"><a style="color: #ffffff;"><%= i %></a></li>
+            <% } else { %>
+                <li class="pagenumber"><a href="/tintuc/<%= IDNhomTinTuc%>/?page=<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(page) + 2 && i < pageNumber) { %>
+                <li class="disable pagenumber"><a>...</a></li>
+            <% } %>
+        <% } %>
+        <li class="pagenumber <% if(page==pageNumber){ %>
+            pagenumber_active
+        <%}%> "><a href="/tintuc/<%= IDNhomTinTuc%>/?page=<%= pageNumber %>"><%= pageNumber %></a></li>
+    </ul>
+<% } else { %>
+    <% if(total!=0) { %>
+        <ul class="pagination justify-content-center mt-5">
+            <% var i = (Number(page) > 1 ? Number(page) - 1 : 1) %>
+            <% if (i !== 1) { %>
+                <li class=" pagenumber"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(page) + 2) && i < pageNumber; i++) { %>
+                <% if (i == page) { %>
+                    <li class="pagenumber pagenumber_active"><a style="color: #ffffff;"><%= i %></a></li>
+                <% } else { %>
+                    <li class="pagenumber"><a href="/tim-kiem/?search=<%= keyword%>&page=<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% if (i == Number(page) + 2 && i < pageNumber) { %>
+                    <li class="disable pagenumber"><a>...</a></li>
+                <% } %>
+            <% } %>
+            <li class="pagenumber <% if(page==pageNumber){ %>
+                pagenumber_active
+            <%}%> "><a href="/tim-kiem/?search=<%= keyword%>&page=<%= pageNumber %>"><%= pageNumber %></a></li>
+        </ul>
+    <% } else { %>
+        <h5>Không tìm thấy kết quả phù hợp</h5>
+    <% }%>
+<% }%>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body class="sb-nav-fixed">
+<%- include('topnav')%>    
+<div id="layoutSidenav">
+
+    <%- include('admin-aside') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h5 class="mt-4 mb-3">
+                    <a href="/admin/themdichvu">Thêm dịch vụ</a> /
+                    <a href="/admin/themkhuyenmai">Thêm chương trình khuyến mãi</a>
+                </h5>
+                <% if (message!=null) { %>
+                    <%- message %>
+                <% } %>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">
+                        Dịch vụ 
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <% dichvucon.map(function (e) { %>
+                            <a href="/admin/dichvu/<%- e.iddichvu[0]%>"><%- e.tendichvu%></a>
+                        <% })%>
+                    </li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="fs-20px">
+                            <i class="fas fa-edit mr-1"></i>
+                            <span class="font-weight-bolder text-info">Chi tiết dịch vụ</span>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <form id="form_sua" action="/admin/dichvu/chitiet/sua" method="post" autocomplete="off">
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+                                        <td width="13%" class="font-weight-bolder">
+                                            <div class="container-fluid" >Mã dịch vụ</div>
+                                        </td>
+                                        <td width="15%" class="font-weight-bolder">
+                                            <% dichvucon.map(function (e) { %>
+                                                <input name="madichvu" class="container-fluid" value="<%- e.madichvucon %>">
+                                                <input name="iddichvucon" value="<%- e.iddichvucon%>" hidden readonly>
+                                            <% })%>
+                                        </td>
+                                        <td width="12%" class="font-weight-bolder">
+                                            <div class="container-fluid">Giá</div>
+                                        </td>
+                                        <td width="15%">
+                                            <% dichvucon.map(function (e) { %>
+                                                <input id="gia" name="gia" class="container-fluid" value="<%- e.gia %>">
+                                            <% })%>
+                                        </td>
+                                        <td width="12%" class="font-weight-bolder">Is active</td>
+                                        <td width="10%">
+                                            <% dichvucon.map(function (e) { %>
+                                                <select name="is_active">
+                                                    <option id="status_active1"><%- e.is_active %></option>
+                                                    <option id="status_active2"></option>
+                                                </select>
+                                            <% })%>
+                                        </td>
+                                        <td width="13%" class="font-weight-bolder">
+                                            <div class="container-fluid">Trạng thái</div>
+                                        </td>
+                                        <td width="10%">
+                                            <% dichvucon.map(function (e) { %>
+                                                <select name="trangthai">
+                                                    <option id="status1"><%- e.trangthai %></option>
+                                                    <option id="status2"></option>
+                                                </select>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Nội dung</div>
+                                        </td>
+                                        <td colspan="7">
+                                            <% dichvucon.map(function (e) { %>
+                                            <textarea name="noidung" class="container-fluid" rows="15"><%-e.noidung %></textarea>
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bolder">
+                                            <div class="container-fluid">Ảnh đại diện</div>
+                                        </td>
+                                        <td colspan="7">
+                                            <% dichvucon.map(function (e) { %>
+                                                <textarea name="anhdaidien" class="container-fluid" rows="2"><%- e.anhdaidien%></textarea>
+                                                <img class="container-fluid" src="<%-e.anhdaidien %>">
+                                            <% })%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button id="btn_sua" type="submit" class="btn btn-primary mt-3" style="width: 20% ;float: right">Chỉnh sửa</button>
+                        </form>
+                        <form id="form_xoa" action="/admin/dichvu/chitiet/xoa" method="post">
+                            <% dichvucon.map(function (e) { %>
+                                <input name="iddichvucon" value="<%- e.iddichvucon%>" readonly hidden>
+                            <% })%>
+                            <button id="btn_xoa" type="submit" class="btn btn-primary mt-3" style="width: 20%;float: left" onclick="alert_delete()">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer.ejs')%>
+    </div>
+</div>
+<%- include('script.ejs')%>
+<script>
+    if(document.getElementById("status_active1")) {
+        if(document.getElementById("status_active1").innerHTML=='true') {
+            document.getElementById("status_active2").innerHTML = "false";
+        }
+        if(document.getElementById("status_active1").innerHTML=='false') {
+            document.getElementById("status_active2").innerHTML = "true";
+        }
+    }
+
+    if(document.getElementById("status1")){
+        if(document.getElementById("status1").innerHTML=='true') {
+            document.getElementById("status2").innerHTML = "false";
+        }
+        if(document.getElementById("status1").innerHTML=='false') {
+            document.getElementById("status2").innerHTML = "true";
+        }
+    }
+
+    $('#btn_sua').click(function () {
+        var gia = document.getElementById('gia').value;
+        if(isNaN(gia)|| gia < 0) {
+            alert_gia();
+            return false;
+        } else {
+            $('#form_sua').submit();
+        }
+    })
+
+    $('#btn_xoa').click(function () {
+           return false;
+        })
+</script>
+</body>
+</html>

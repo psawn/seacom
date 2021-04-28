@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head')%>
+<body>
+    <header>
+        <div class="alert alert-primary bg-dark" role="alert">
+            <div class="container">
+                <div style="color:#f2f2f2"><%- alert%></div>
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" name="TenDangNhap" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="text" name="MatKhau" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+    <%- include('footer.ejs')%>
+</body>
+</html>
